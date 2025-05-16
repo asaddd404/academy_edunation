@@ -33,7 +33,7 @@
         .edu-element {
             position: absolute;
             color: rgba(124, 197, 143, 0.5);
-            font-size: 30px;
+            font-size: clamp(20px, 5vw, 30px);
             animation: drift 25s infinite ease-in-out;
         }
         @keyframes drift {
@@ -43,7 +43,7 @@
         }
         header {
             background-color: #291674;
-            padding: 20px;
+            padding: 15px 20px;
             position: fixed;
             width: 100%;
             top: 0;
@@ -57,44 +57,34 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-         .logo {
-            background: none;
-            border: none;
-            padding: 0;
-        }
         .logo img {
-            height: 200px;
-            background: none;
-            border: none;
+            height: clamp(100px, 20vw, 150px);
             transition: filter 0.3s ease;
         }
         .logo img:hover {
-            filter: brightness(1.4) drop-shadow(0 0 20px rgba(124, 197, 143, 0.6)) drop-shadow(0 0 25px rgba(41, 22, 116, 0.4));
+            filter: brightness(1.4) drop-shadow(0 0 20px rgba(124, 197, 143, 0.6));
             animation: glow 1.5s ease-in-out infinite alternate;
         }
-        
         @keyframes glow {
             0% { filter: brightness(1.2) drop-shadow(0 0 8px rgba(124, 197, 143, 0.5)); }
-            50% { filter: brightness(1.4) drop-shadow(0 0 15px rgba(41, 22, 116, 0.4)); }
-            100% { filter: brightness(1.2) drop-shadow(0 0 8px rgba(124, 197, 143, 0.5)); }
+            100% { filter: brightness(1.4) drop-shadow(0 0 15px rgba(41, 22, 116, 0.4)); }
         }
         .nav-links {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
         .nav-links a {
             color: #FFFFFF;
             text-decoration: none;
             font-family: 'Poppins', sans-serif;
             font-size: 16px;
-            padding: 10px 20px;
+            padding: 10px 15px;
             transition: color 0.3s ease, transform 0.3s ease;
-            filter: brightness(0.7);
         }
         .nav-links a:hover {
             color: #7CC58F;
             transform: translateY(-2px);
-            filter: brightness(1);
             text-shadow: 0 0 10px rgba(124, 197, 143, 0.7);
         }
         .hamburger {
@@ -105,6 +95,10 @@
             color: #FFFFFF;
             cursor: pointer;
             padding: 10px;
+            transition: transform 0.3s ease;
+        }
+        .hamburger:hover {
+            transform: scale(1.1);
         }
         .hero {
             height: 100vh;
@@ -115,18 +109,18 @@
             text-align: center;
             position: relative;
             z-index: 1;
+            padding: 20px;
         }
         .hero h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 60px;
+            font-size: clamp(36px, 10vw, 60px);
             font-weight: 700;
             margin-bottom: 20px;
             animation: slideIn 1s ease-out;
         }
         .hero p {
-            font-size: 22px;
+            font-size: clamp(18px, 5vw, 22px);
             margin-bottom: 30px;
-            animation: slideIn 1.2s ease-out;
         }
         .typewriter {
             overflow: hidden;
@@ -135,7 +129,7 @@
             animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
         }
         @keyframes typing {
-            from { width: W0; }
+            from { width: 0; }
             to { width: 100%; }
         }
         @keyframes blink-caret {
@@ -150,14 +144,12 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             border-radius: 50px;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-            filter: brightness(0.7);
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
         .btn:hover {
             background-color: #FFFFFF;
             transform: scale(1.05);
             box-shadow: 0 5px 15px rgba(124, 197, 143, 0.5);
-            filter: brightness(1);
         }
         section {
             padding: 80px 20px;
@@ -168,7 +160,7 @@
         }
         h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 40px;
+            font-size: clamp(32px, 8vw, 40px);
             font-weight: 700;
             text-align: center;
             margin-bottom: 50px;
@@ -204,10 +196,9 @@
             padding: 30px;
             border-radius: 15px;
             text-align: center;
-            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.3s ease;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
             position: relative;
             overflow: hidden;
-            filter: brightness(0.7);
         }
         .course-card::before {
             content: '';
@@ -226,7 +217,6 @@
         .course-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(124, 197, 143, 0.5);
-            filter: brightness(1);
         }
         .course-card i {
             font-size: 40px;
@@ -245,7 +235,7 @@
         .carousel {
             position: relative;
             overflow: hidden;
-            max-width: 1080px;
+            max-width: 100%;
             margin: 0 auto;
         }
         .carousel-slides {
@@ -253,7 +243,7 @@
             transition: transform 0.6s ease-out;
         }
         .carousel-slide {
-            min-width: 33.33%;
+            flex: 0 0 33.33%;
             text-align: center;
             padding: 10px;
             background: linear-gradient(135deg, rgba(124, 197, 143, 0.1), transparent);
@@ -268,11 +258,10 @@
         }
         .carousel-slide iframe {
             width: 100%;
-            height: 480px;
+            height: clamp(360px, 80vw, 480px);
             aspect-ratio: 9/16;
             border: none;
-            border-radius: 10px;
-            filter: brightness(0.7);
+            border-radius: 15px;
             transition: filter 0.3s ease;
         }
         .carousel-slide.active iframe {
@@ -422,14 +411,12 @@
             font-family: 'Roboto', sans-serif;
             background-color: rgba(255, 255, 255, 0.9);
             color: #2E4A47;
-            transition: box-shadow 0.3s ease, transform 0.3s ease, filter 0.3s ease;
-            filter: brightness(0.9);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         input:focus, textarea:focus {
             outline: none;
             box-shadow: 0 0 25px rgba(124, 197, 143, 0.9), inset 0 0 5px rgba(124, 197, 143, 0.3);
-            filter: brightness(1);
             transform: scale(1.03);
         }
         button {
@@ -441,25 +428,22 @@
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
-            filter: brightness(0.9);
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 6px 18px rgba(124, 197, 143, 0.4);
         }
         button:hover {
             background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
             transform: scale(1.07);
-            filter: brightness(1);
             box-shadow: 0 10px 30px rgba(124, 197, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
         }
-        iframe {
+        .apply iframe {
             width: 100%;
-            height: 450px;
+            height: clamp(300px, 50vw, 450px);
             border: none;
             border-radius: 10px;
-            filter: brightness(0.7);
             transition: filter 0.3s ease;
         }
-        iframe:hover {
+        .apply iframe:hover {
             filter: brightness(1);
         }
         footer {
@@ -473,6 +457,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
+            flex-wrap: wrap;
         }
         footer a {
             color: #2E4A47;
@@ -490,24 +475,31 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
+                z-index: 101;
             }
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 0;
                 left: 0;
-                right: 0;
+                width: 100%;
+                height: 100vh;
                 background-color: #291674;
                 flex-direction: column;
-                padding: 20px;
-                transform: translateY(-100%);
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                transform: translateX(100%);
                 transition: transform 0.3s ease-in-out;
+                backdrop-filter: blur(10px);
+                z-index: 100;
             }
             .nav-links.active {
                 display: flex;
-                transform: translateY(0);
+                transform: translateX(0);
             }
             .nav-links a {
+                font-size: 24px;
                 padding: 15px;
                 width: 100%;
                 text-align: center;
@@ -525,13 +517,34 @@
                 grid-template-columns: 1fr;
             }
             .carousel-slide {
-                min-width: 50%;
+                flex: 0 0 100%;
             }
             .carousel-slide iframe {
-                height: 360px;
+                height: calc(100vw * 1.7778); /* 9:16 aspect ratio */
+                max-height: 640px;
+                border-radius: 15px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             }
             .logo img {
                 height: 100px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .btn {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+            .courses, .videos, .apply, .teachers, .results {
+                padding: 30px;
+            }
+            h2 {
+                font-size: 28px;
             }
         }
     </style>
@@ -541,8 +554,8 @@
 
     <header>
         <nav>
-            <div class="nav-links">
-                <a href="#home">Edunation Academy</a>
+            <div class="logo">
+                <a href="#home"><img src="img/eduna-removebg-preview.png" alt="Edunation Academy Logo"></a>
             </div>
             <button class="hamburger"><i class="fas fa-bars"></i></button>
             <div class="nav-links">
@@ -555,9 +568,6 @@
     </header>
 
     <section class="hero" id="home">
-        <div class="logo">
-            <img src="img/eduna-removebg-preview.png" alt="Edunation Academy Logo">
-        </div>
         <h1>Edunation Academy</h1>
         <p class="typewriter">Современное образование для вашего успеха</p>
         <a href="#apply" class="btn">Записаться на курс</a>
@@ -639,19 +649,19 @@
         <h2>Наши учителя</h2>
         <div class="teacher-grid">
             <div class="teacher-card">
-                <img src="img/1.jpeg" alt="Teacher 1">
+                <img src="img/1.jpeg" alt="Айнур А.">
                 <h3>Айнур А.</h3>
                 <p>Преподаватель английского</p>
                 <div class="bio">Айнур имеет 10 лет опыта и сертификат TESOL, помогла сотням учеников сдать IELTS.</div>
             </div>
             <div class="teacher-card">
-                <img src="img/2.jpeg" alt="Teacher 2">
+                <img src="img/2.jpeg" alt="Ерлан Б.">
                 <h3>Ерлан Б.</h3>
                 <p>Преподаватель математики</p>
                 <div class="bio">Ерлан — выпускник МГУ, обожает математику и делает её понятной для всех.</div>
             </div>
             <div class="teacher-card">
-                <img src="img/3.jpeg" alt="Teacher 3">
+                <img src="img/3.jpeg" alt="Салтанат К.">
                 <h3>Салтанат К.</h3>
                 <p>Преподаватель IT</p>
                 <div class="bio">Салтанат — разработчик с 8-летним стажем, обучила программированию более 200 учеников.</div>
@@ -670,7 +680,8 @@
             </form>
             <div>
                 <h3>Где мы находимся</h3>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d402.12555977440053!2d69.82420382108293!3d42.4237491216985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a8e5aae8b21b37%3A0x7cb2c9bf26ebf4f!2sLABIRINT!5e0!3m2!1sru!2skz!4v1747353895745!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d402.12555977440053!2d69.82420382108293!3d42.4237491216985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a8e5aae8b21b37%3A0x7cb2c9bf26ebf4f!2sLABIRINT!5e0!3m2!1sru!2skz!4v1747353895745!5m2!1sru!2skz" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </section>
 
@@ -689,17 +700,27 @@
             navLinks.classList.toggle('active');
             hamburger.innerHTML = navLinks.classList.contains('active') ? 
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Close menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
                 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = 'auto';
             });
         });
 
-        // Create educational background
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Educational background
         const background = document.getElementById('education-background');
         const icons = [
             '<i class="fas fa-book"></i>',
@@ -711,26 +732,28 @@
             '<span style="font-family: Poppins;">∑</span>',
             '<span style="font-family: Poppins;">√</span>'
         ];
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
             const element = document.createElement('div');
             element.classList.add('edu-element');
             element.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             element.style.left = `${Math.random() * 100}vw`;
-            element.style.fontSize = `${Math.random() * 20 + 20}px`;
+            element.style.fontSize = `${Math.random() * 15 + 15}px`;
             element.style.animationDelay = `${Math.random() * 20}s`;
-            element.style.animationDuration = `${Math.random() * 20 + 15}s`;
+            element.style.animationDuration = `${Math.random() * 15 + 10}s`;
             background.appendChild(element);
         }
 
-        // Carousel functionality for videos
-        const carousel = document.querySelector('#videos .carousel');
+        // Carousel functionality
+        const carousel = document.querySelector('.carousel');
         const slides = carousel.querySelector('.carousel-slides');
         const slideElements = carousel.querySelectorAll('.carousel-slide');
         const slideCount = slideElements.length;
         let currentIndex = 0;
 
         function updateCarousel() {
-            const offset = -(currentIndex - 1) * 33.33;
+            const isMobile = window.innerWidth <= 768;
+            const slideWidth = isMobile ? 100 : 33.33;
+            const offset = -currentIndex * slideWidth;
             slides.style.transform = `translateX(${offset}%)`;
 
             slideElements.forEach((slide, index) => {
@@ -751,6 +774,7 @@
             updateCarousel();
         }, 5000);
 
+        window.addEventListener('resize', updateCarousel);
         updateCarousel();
 
         // Form submission effect
