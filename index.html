@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edunation Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2E4A47;
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+        #education-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #2E4A47 0%, #3A615E 100%);
+            overflow: hidden;
+        }
+        .edu-element {
+            position: absolute;
+            color: rgba(124, 197, 143, 0.5);
+            font-size: 30px;
+            animation: drift 25s infinite ease-in-out;
+        }
+        @keyframes drift {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0.3; }
+        }
+        header {
+            background-color: #291674;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+         .logo {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .logo img {
+            height: 200px;
+            background: none;
+            border: none;
+            transition: filter 0.3s ease;
+        }
+        .logo img:hover {
+            filter: brightness(1.4) drop-shadow(0 0 20px rgba(124, 197, 143, 0.6)) drop-shadow(0 0 25px rgba(41, 22, 116, 0.4));
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            0% { filter: brightness(1.2) drop-shadow(0 0 8px rgba(124, 197, 143, 0.5)); }
+            50% { filter: brightness(1.4) drop-shadow(0 0 15px rgba(41, 22, 116, 0.4)); }
+            100% { filter: brightness(1.2) drop-shadow(0 0 8px rgba(124, 197, 143, 0.5)); }
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            padding: 10px 20px;
+            transition: color 0.3s ease, transform 0.3s ease;
+            filter: brightness(0.7);
+        }
+        .nav-links a:hover {
+            color: #7CC58F;
+            transform: translateY(-2px);
+            filter: brightness(1);
+            text-shadow: 0 0 10px rgba(124, 197, 143, 0.7);
+        }
+        .hamburger {
+            display: none;
+            font-size: 24px;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            cursor: pointer;
+            padding: 10px;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 30px;
+            animation: slideIn 1.2s ease-out;
+        }
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #7CC58F;
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: W0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #7CC58F; }
+        }
+        .btn {
+            background-color: #7CC58F;
+            color: #2E4A47;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            filter: brightness(0.7);
+        }
+        .btn:hover {
+            background-color: #FFFFFF;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(124, 197, 143, 0.5);
+            filter: brightness(1);
+        }
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #7CC58F;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: #7CC58F;
+        }
+        .courses, .videos, .apply, .teachers, .results {
+            background: rgba(58, 97, 94, 0.8);
+            border-radius: 15px;
+            padding: 50px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(5px);
+            overflow: hidden;
+        }
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .course-card {
+            background-color: #FFFFFF;
+            color: #2E4A47;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, filter 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            filter: brightness(0.7);
+        }
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #7CC58F, transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .course-card:hover::before {
+            opacity: 0.3;
+        }
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(124, 197, 143, 0.5);
+            filter: brightness(1);
+        }
+        .course-card i {
+            font-size: 40px;
+            color: #7CC58F;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+        .course-card:hover i {
+            transform: rotate(360deg);
+        }
+        .course-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .carousel {
+            position: relative;
+            overflow: hidden;
+            max-width: 1080px;
+            margin: 0 auto;
+        }
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.6s ease-out;
+        }
+        .carousel-slide {
+            min-width: 33.33%;
+            text-align: center;
+            padding: 10px;
+            background: linear-gradient(135deg, rgba(124, 197, 143, 0.1), transparent);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .carousel-slide.active {
+            transform: translateY(-20px);
+            box-shadow: 0 15px 30px rgba(124, 197, 143, 0.5);
+            z-index: 2;
+        }
+        .carousel-slide iframe {
+            width: 100%;
+            height: 480px;
+            aspect-ratio: 9/16;
+            border: none;
+            border-radius: 10px;
+            filter: brightness(0.7);
+            transition: filter 0.3s ease;
+        }
+        .carousel-slide.active iframe {
+            filter: brightness(1);
+        }
+        .student-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .student-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(124, 197, 143, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(124, 197, 143, 0.3);
+        }
+        .student-card img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+            object-fit: contain;
+            transition: filter 0.3s ease;
+        }
+        .student-card:hover img {
+            filter: brightness(0.8);
+        }
+        .student-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .student-card p {
+            font-size: 16px;
+            color: #E0E0E0;
+        }
+        .student-card .bio {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(46, 74, 71, 0.9);
+            color: #FFFFFF;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 80%;
+            text-align: center;
+            z-index: 3;
+        }
+        .student-card:hover .bio {
+            opacity: 1;
+        }
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .teacher-card {
+            text-align: center;
+            padding: 20px;
+            background: rgba(124, 197, 143, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            position: relative;
+        }
+        .teacher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(124, 197, 143, 0.3);
+            background-color: rgba(46, 74, 71, 0.7);
+        }
+        .teacher-card:hover h3,
+        .teacher-card:hover p {
+            color: #7CC58F;
+            text-shadow: 0 0 10px rgba(124, 197, 143, 0.7);
+        }
+        .teacher-card img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 15px;
+            object-fit: contain;
+            transition: filter 0.3s ease;
+        }
+        .teacher-card:hover img {
+            filter: brightness(0.8);
+        }
+        .teacher-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        .teacher-card p {
+            font-size: 16px;
+            color: #E0E0E0;
+        }
+        .teacher-card .bio {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(46, 74, 71, 0.9);
+            color: #FFFFFF;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 80%;
+            text-align: center;
+            z-index: 3;
+        }
+        .teacher-card:hover .bio {
+            opacity: 1;
+        }
+        .apply-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            background: linear-gradient(135deg, rgba(124, 197, 143, 0.3), rgba(58, 97, 94, 0.6));
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(124, 197, 143, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        form:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 50px rgba(124, 197, 143, 0.7), inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        input, textarea {
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Roboto', sans-serif;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #2E4A47;
+            transition: box-shadow 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+            filter: brightness(0.9);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            box-shadow: 0 0 25px rgba(124, 197, 143, 0.9), inset 0 0 5px rgba(124, 197, 143, 0.3);
+            filter: brightness(1);
+            transform: scale(1.03);
+        }
+        button {
+            background: linear-gradient(45deg, #7CC58F, #5BAE7F);
+            color: #2E4A47;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+            filter: brightness(0.9);
+            box-shadow: 0 6px 18px rgba(124, 197, 143, 0.4);
+        }
+        button:hover {
+            background: linear-gradient(45deg, #FFFFFF, #E0E0E0);
+            transform: scale(1.07);
+            filter: brightness(1);
+            box-shadow: 0 10px 30px rgba(124, 197, 143, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            border-radius: 10px;
+            filter: brightness(0.7);
+            transition: filter 0.3s ease;
+        }
+        iframe:hover {
+            filter: brightness(1);
+        }
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #7CC58F;
+            color: #2E4A47;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        footer a {
+            color: #2E4A47;
+            font-size: 24px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        footer a:hover {
+            transform: scale(1.2);
+            color: #FFFFFF;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #291674;
+                flex-direction: column;
+                padding: 20px;
+                transform: translateY(-100%);
+                transition: transform 0.3s ease-in-out;
+            }
+            .nav-links.active {
+                display: flex;
+                transform: translateY(0);
+            }
+            .nav-links a {
+                padding: 15px;
+                width: 100%;
+                text-align: center;
+            }
+            .apply-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 40px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .teacher-grid, .student-grid {
+                grid-template-columns: 1fr;
+            }
+            .carousel-slide {
+                min-width: 50%;
+            }
+            .carousel-slide iframe {
+                height: 360px;
+            }
+            .logo img {
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="education-background"></div>
+
+    <header>
+        <nav>
+            <div class="nav-links">
+                <a href="#home">Edunation Academy</a>
+            </div>
+            <button class="hamburger"><i class="fas fa-bars"></i></button>
+            <div class="nav-links">
+                <a href="#home">Главная</a>
+                <a href="#courses">Курсы</a>
+                <a href="#videos">Видео</a>
+                <a href="#apply">Заявка</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="logo">
+            <img src="img/eduna-removebg-preview.png" alt="Edunation Academy Logo">
+        </div>
+        <h1>Edunation Academy</h1>
+        <p class="typewriter">Современное образование для вашего успеха</p>
+        <a href="#apply" class="btn">Записаться на курс</a>
+    </section>
+
+    <section class="courses" id="courses">
+        <h2>Наши курсы</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <i class="fas fa-globe"></i>
+                <h3>Английский язык</h3>
+                <p>Для всех уровней: от начального до продвинутого.</p>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-calculator"></i>
+                <h3>Математика</h3>
+                <p>Подготовка к экзаменам и углубленное изучение.</p>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-book"></i>
+                <h3>Русский язык</h3>
+                <p>Грамматика, литература и подготовка к экзаменам.</p>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>IT</h3>
+                <p>Программирование и основы технологий.</p>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-child"></i>
+                <h3>Дошкольное образование</h3>
+                <p>Подготовка детей к школе с заботой.</p>
+            </div>
+            <div class="course-card">
+                <i class="fas fa-graduation-cap"></i>
+                <h3>Подготовка к ЕНТ</h3>
+                <p>Интенсивные курсы для высоких результатов.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos" id="videos">
+        <h2>Наши Shorts</h2>
+        <div class="carousel">
+            <div class="carousel-slides">
+                <div class="carousel-slide"><iframe src="https://www.youtube.com/embed/SHORTS_ID_1?autoplay=0" allowfullscreen></iframe></div>
+                <div class="carousel-slide"><iframe src="https://www.youtube.com/embed/SHORTS_ID_2?autoplay=0" allowfullscreen></iframe></div>
+                <div class="carousel-slide"><iframe src="https://www.youtube.com/embed/SHORTS_ID_3?autoplay=0" allowfullscreen></iframe></div>
+                <div class="carousel-slide"><iframe src="https://www.youtube.com/embed/SHORTS_ID_4?autoplay=0" allowfullscreen></iframe></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results" id="results">
+        <h2>Результаты наших учеников</h2>
+        <div class="student-grid">
+            <div class="student-card">
+                <img src="img/uch1.jpeg" alt="Айгерим К.">
+                <h3>Айгерим К.</h3>
+                <p>Сдала ЕНТ на 125 баллов!</p>
+                <div class="bio">Айгерим — трудолюбивая ученица, которая готовилась к ЕНТ с нашими преподавателями в течение года.</div>
+            </div>
+            <div class="student-card">
+                <img src="img/uch2.jpeg" alt="Данияр Т.">
+                <h3>Данияр Т.</h3>
+                <p>Получил IELTS 7.5!</p>
+                <div class="bio">Данияр мечтал учиться за границей и достиг своей цели благодаря интенсивным курсам IELTS.</div>
+            </div>
+            <div class="student-card">
+                <img src="img/uch3.jpeg" alt="Асем С.">
+                <h3>Асем С.</h3>
+                <p>Освоил программирование за 6 месяцев.</p>
+                <div class="bio">Асем с нуля освоил Python и теперь работает над своим первым приложением.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="teachers" id="teachers">
+        <h2>Наши учителя</h2>
+        <div class="teacher-grid">
+            <div class="teacher-card">
+                <img src="img/1.jpeg" alt="Teacher 1">
+                <h3>Айнур А.</h3>
+                <p>Преподаватель английского</p>
+                <div class="bio">Айнур имеет 10 лет опыта и сертификат TESOL, помогла сотням учеников сдать IELTS.</div>
+            </div>
+            <div class="teacher-card">
+                <img src="img/2.jpeg" alt="Teacher 2">
+                <h3>Ерлан Б.</h3>
+                <p>Преподаватель математики</p>
+                <div class="bio">Ерлан — выпускник МГУ, обожает математику и делает её понятной для всех.</div>
+            </div>
+            <div class="teacher-card">
+                <img src="img/3.jpeg" alt="Teacher 3">
+                <h3>Салтанат К.</h3>
+                <p>Преподаватель IT</p>
+                <div class="bio">Салтанат — разработчик с 8-летним стажем, обучила программированию более 200 учеников.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="apply" id="apply">
+        <h2>Оставить заявку</h2>
+        <div class="apply-grid">
+            <form id="applicationForm">
+                <input type="text" id="name" placeholder="Ваше имя" required>
+                <input type="tel" id="phone" placeholder="Ваш номер телефона" required>
+                <textarea id="message" placeholder="Ваше сообщение" rows="5"></textarea>
+                <button type="button" onclick="submitForm()">Отправить заявку</button>
+            </form>
+            <div>
+                <h3>Где мы находимся</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d402.12555977440053!2d69.82420382108293!3d42.4237491216985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a8e5aae8b21b37%3A0x7cb2c9bf26ebf4f!2sLABIRINT!5e0!3m2!1sru!2skz!4v1747353895745!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Edunation Academy © 2025 | Контакты: +7 (XXX) XXX-XX-XX | Email: info@edunation.kz</p>
+        <a href="https://wa.me/77001234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://instagram.com/edunationacademy" target="_blank"><i class="fab fa-instagram"></i></a>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close menu when clicking a link
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Create educational background
+        const background = document.getElementById('education-background');
+        const icons = [
+            '<i class="fas fa-book"></i>',
+            '<i class="fas fa-pencil-alt"></i>',
+            '<i class="fas fa-ruler"></i>',
+            '<i class="fas fa-graduation-cap"></i>',
+            '<i class="fas fa-globe"></i>',
+            '<span style="font-family: Poppins;">π</span>',
+            '<span style="font-family: Poppins;">∑</span>',
+            '<span style="font-family: Poppins;">√</span>'
+        ];
+        for (let i = 0; i < 50; i++) {
+            const element = document.createElement('div');
+            element.classList.add('edu-element');
+            element.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            element.style.left = `${Math.random() * 100}vw`;
+            element.style.fontSize = `${Math.random() * 20 + 20}px`;
+            element.style.animationDelay = `${Math.random() * 20}s`;
+            element.style.animationDuration = `${Math.random() * 20 + 15}s`;
+            background.appendChild(element);
+        }
+
+        // Carousel functionality for videos
+        const carousel = document.querySelector('#videos .carousel');
+        const slides = carousel.querySelector('.carousel-slides');
+        const slideElements = carousel.querySelectorAll('.carousel-slide');
+        const slideCount = slideElements.length;
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const offset = -(currentIndex - 1) * 33.33;
+            slides.style.transform = `translateX(${offset}%)`;
+
+            slideElements.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                    const iframe = slide.querySelector('iframe');
+                    iframe.src = iframe.src.replace('autoplay=0', 'autoplay=1');
+                } else {
+                    slide.classList.remove('active');
+                    const iframe = slide.querySelector('iframe');
+                    iframe.src = iframe.src.replace('autoplay=1', 'autoplay=0');
+                }
+            });
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateCarousel();
+        }, 5000);
+
+        updateCarousel();
+
+        // Form submission effect
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const message = document.getElementById('message').value;
+
+            if (name && phone) {
+                alert('Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.');
+                document.getElementById('applicationForm').reset();
+            } else {
+                alert('Пожалуйста, заполните все обязательные поля.');
+            }
+        }
+
+        // Scroll reveal effect
+        const sections = document.querySelectorAll('section');
+        const revealSection = () => {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.8) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(50px)';
+            section.style.transition = 'all 0.8s ease-out';
+        });
+        window.addEventListener('scroll', revealSection);
+        revealSection();
+    </script>
+</body>
+</html>
