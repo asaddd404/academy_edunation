@@ -33,8 +33,8 @@
         .edu-element {
             position: absolute;
             color: rgba(124, 197, 143, 0.5);
-            font-size: clamp(20px, 5vw, 30px);
-            animation: drift 25s infinite ease-in-out;
+            font-size: clamp(15px, 4vw, 25px);
+            animation: drift 20s infinite ease-in-out;
         }
         @keyframes drift {
             0% { transform: translateY(100vh) rotate(0deg); opacity: 0.3; }
@@ -58,7 +58,7 @@
             margin: 0 auto;
         }
         .logo img {
-            height: clamp(100px, 20vw, 150px);
+            height: clamp(80px, 15vw, 120px);
             transition: filter 0.3s ease;
         }
         .logo img:hover {
@@ -96,9 +96,30 @@
             cursor: pointer;
             padding: 10px;
             transition: transform 0.3s ease;
+            z-index: 102;
         }
         .hamburger:hover {
             transform: scale(1.1);
+        }
+        .hamburger i {
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active i {
+            transform: rotate(90deg);
+        }
+        .backdrop {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 99;
+        }
+        .backdrop.active {
+            display: block;
         }
         .hero {
             height: 100vh;
@@ -241,6 +262,7 @@
         .carousel-slides {
             display: flex;
             transition: transform 0.6s ease-out;
+            will-change: transform;
         }
         .carousel-slide {
             flex: 0 0 33.33%;
@@ -475,14 +497,13 @@
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
-                z-index: 101;
             }
             .nav-links {
                 display: none;
                 position: fixed;
                 top: 0;
-                left: 0;
-                width: 100%;
+                right: 0;
+                width: 75%;
                 height: 100vh;
                 background-color: #291674;
                 flex-direction: column;
@@ -491,7 +512,9 @@
                 gap: 30px;
                 transform: translateX(100%);
                 transition: transform 0.3s ease-in-out;
-                backdrop-filter: blur(10px);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+                border-radius: 15px 0 0 15px;
+                will-change: transform;
                 z-index: 100;
             }
             .nav-links.active {
@@ -499,7 +522,7 @@
                 transform: translateX(0);
             }
             .nav-links a {
-                font-size: 24px;
+                font-size: 22px;
                 padding: 15px;
                 width: 100%;
                 text-align: center;
@@ -526,7 +549,7 @@
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             }
             .logo img {
-                height: 100px;
+                height: 80px;
             }
         }
         @media (max-width: 480px) {
@@ -546,11 +569,15 @@
             h2 {
                 font-size: 28px;
             }
+            .nav-links a {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div id="education-background"></div>
+    <div class="backdrop"></div>
 
     <header>
         <nav>
@@ -687,7 +714,7 @@
 
     <footer>
         <p>Edunation Academy © 2025 | Контакты: +7 (XXX) XXX-XX-XX | Email: info@edunation.kz</p>
-        <a href="https://wa.me/77001234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <Longitude href="https://wa.me/77001234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="https://instagram.com/edunationacademy" target="_blank"><i class="fab fa-instagram"></i></a>
     </footer>
 
@@ -695,29 +722,33 @@
         // Hamburger menu toggle
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
+        const backdrop = document.querySelector('.backdrop');
 
         hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            hamburger.innerHTML = navLinks.classList.contains('active') ? 
-                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+            const isActive = navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            backdrop.classList.toggle('active');
+            hamburger.innerHTML = isActive ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = isActive ? 'hidden' : 'auto';
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+                backdrop.classList.remove('active');
                 hamburger.innerHTML = '<i class="fas fa-bars"></i>';
                 document.body.style.overflow = 'auto';
             });
         });
 
-        // Close menu on outside click
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !hamburger.contains(e.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
-                document.body.style.overflow = 'auto';
-            }
+        // Close menu on backdrop click
+        backdrop.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+            backdrop.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            document.body.style.overflow = 'auto';
         });
 
         // Educational background
@@ -732,14 +763,14 @@
             '<span style="font-family: Poppins;">∑</span>',
             '<span style="font-family: Poppins;">√</span>'
         ];
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 25; i++) {
             const element = document.createElement('div');
             element.classList.add('edu-element');
             element.innerHTML = icons[Math.floor(Math.random() * icons.length)];
             element.style.left = `${Math.random() * 100}vw`;
-            element.style.fontSize = `${Math.random() * 15 + 15}px`;
-            element.style.animationDelay = `${Math.random() * 20}s`;
-            element.style.animationDuration = `${Math.random() * 15 + 10}s`;
+            element.style.fontSize = `${Math.random() * 10 + 15}px`;
+            element.style.animationDelay = `${Math.random() * 15}s`;
+            element.style.animationDuration = `${Math.random() * 10 + 10}s`;
             background.appendChild(element);
         }
 
@@ -774,7 +805,12 @@
             updateCarousel();
         }, 5000);
 
-        window.addEventListener('resize', updateCarousel);
+        // Debounced resize handler
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(updateCarousel, 100);
+        });
         updateCarousel();
 
         // Form submission effect
